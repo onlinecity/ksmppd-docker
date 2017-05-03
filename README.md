@@ -1,6 +1,6 @@
 # ksmppd dockerized
 
-A sample project on how to dockerize ksmppd, including a kannel docker-compose stack. It's based on alpine linux to keep the containers lightweight.
+A sample project on how to dockerize [ksmppd](https://github.com/kneodev/ksmppd), including a kannel docker-compose stack. It's based on alpine linux to keep the containers lightweight.
 
 ### Installation & usage
 
@@ -16,7 +16,7 @@ To test this it run `docker compose up` , if you see failures run it again since
 
 After everything is running you can inject a message into the loop by using the provided sms box.
 
-`curl "http://localhost:14013/cgi-bin/sendsms?username=tester&password=foobar&message=Test"`
+`curl -v "http://localhost:14013/cgi-bin/sendsms?username=tester&password=foobar&message=Test&to=78001234"`
 
 You can also check out the ksmppd status page
 
@@ -24,6 +24,16 @@ You can also check out the ksmppd status page
 
 ### Caveats
 
-This project is provided in the hope it might be useful to someone, and is not supported or endorsed by OnlineCity in any way.
+This project is provided in the hope it might be useful to someone, and is not supported or endorsed by OnlineCity in any way. Do not attempt to use this if you do not know what you're doing, because you're on your own.
 
 The sample config in this project is unsafe, remember to change passwords etc. Use at own risk.
+
+```
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```

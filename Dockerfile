@@ -8,7 +8,9 @@ ADD https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem.txt \
 COPY svn-trust /etc/subversion/servers
 ADD https://github.com/kneodev/ksmppd/archive/1.0.2.tar.gz /
 RUN tar xvzpf 1.0.2.tar.gz
-RUN mkdir /ksmppd-1.0.2/kannel-svn-trunk && ln -s /usr/share/libtool/build-aux/ltmain.sh /ksmppd-1.0.2/kannel-svn-trunk/ltmain.sh
+RUN mkdir /ksmppd-1.0.2/kannel-svn-trunk && \
+  ln -s /usr/share/libtool/build-aux/ltmain.sh \
+  /ksmppd-1.0.2/kannel-svn-trunk/ltmain.sh
 RUN ln -s /usr/include/unistd.h /usr/include/sys/unistd.h
 RUN cd ksmppd-1.0.2 && ./bootstrap.sh && make
 
