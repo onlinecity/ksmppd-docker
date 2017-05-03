@@ -1,5 +1,6 @@
 # ksmppd dockerized
 
+[![Docker Build Status](https://img.shields.io/docker/build/onlinecity/ksmppd.svg)]()
 A sample project on how to dockerize [ksmppd](https://github.com/kneodev/ksmppd), including a kannel docker-compose stack. It's based on alpine linux to keep the containers lightweight.
 
 ### Installation & usage
