@@ -1,4 +1,4 @@
-version: '2.1'
+version: '2'
 volumes:
     database: {}
 services:
@@ -11,35 +11,35 @@ services:
     volumes:
       - ./config:/etc/kannel
     depends_on:
-      mariadb:
-        condition: service_healthy
+      - bearerbox
+      - mariadb
+    entrypoint:
+      - /wait-for-it.sh
+    command: [
+      "mariadb:3306", "--",
+      "/usr/local/bin/ksmppd", "/etc/kannel/ksmppd.conf"
+    ]
   mariadb:
     image: mariadb
     environment:
      - MYSQL_RANDOM_ROOT_PASSWORD=yes
      - MYSQL_DATABASE=ksmppd
-    restart: always
-    healthcheck:
-      test: "/usr/bin/mysql --user=ksmppduser --password=ksmppdpass --execute \"SHOW DATABASES;\""
-      interval: 3s
-      timeout: 1s
-      retries: 15
     volumes:
      - ./initdb:/docker-entrypoint-initdb.d
      - database:/var/lib/mysql
   bearerbox:
-    image: nguyendinhtrung141/kannel-1.4.4:alpine
+    image: onlinecity/kannel
     hostname: bearerbox
-    command: bearerbox /etc/kannel/kannel.conf
-    depends_on:
-      - ksmppd
+    entrypoint: bearerbox
+    command: /etc/kannel/kannel.conf
     volumes:
       - ./config:/etc/kannel
       - ./log:/var/log/kannel
   smsbox:
-    image: nguyendinhtrung141/kannel-1.4.4:alpine
+    image: onlinecity/kannel
     hostname: smsbox
-    command: smsbox /etc/kannel/kannel.conf
+    entrypoint: smsbox
+    command: /etc/kannel/kannel.conf
     ports:
       - "14013:14013"
     links:
